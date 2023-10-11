@@ -4,6 +4,8 @@ import DashboardLayout from '../views/layouts/DashboardLayout';
 import HomePage from '../views/home/home/HomePage';
 import SignInAndUpPage from '../views/home/signInAndUp/SignInAndUpPage';
 import JobDetailsPage from '../views/home/joddetails/JobDetailsPage';
+import UserPage from '../views/dashboard/user/UserPage';
+import JobsPage from '../views/dashboard/viewJobs/JobsPage';
 
 const router=createBrowserRouter([
     {
@@ -30,7 +32,14 @@ const router=createBrowserRouter([
         path:"dashboard",
         element:<DashboardLayout/>,
         children:[
-           
+           {
+            path:'/dashboard/users',
+            element:<UserPage/>
+           },
+           {
+            path:'/dashboard/job',
+            element:<JobsPage/>
+           }
         ]
     }
 ])
