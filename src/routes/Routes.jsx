@@ -3,6 +3,7 @@ import HomeLayout from '../views/layouts/HomeLayout';
 import DashboardLayout from '../views/layouts/DashboardLayout';
 import HomePage from '../views/home/home/HomePage';
 import SignInAndUpPage from '../views/home/signInAndUp/SignInAndUpPage';
+import JobDetailsPage from '../views/home/joddetails/JobDetailsPage';
 
 const router=createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router=createBrowserRouter([
             {
                 path:'/',
                 element:<HomePage/>
+            },
+            {
+                path:'/job/:slug',
+                element:<JobDetailsPage/>
             },
             {
                 path:'/signin',

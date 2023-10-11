@@ -1,9 +1,9 @@
 import JobCard from "../../../components/homeComponents/JobCard";
-import getAllJob from "../../../utils/getAllJob";
+import getAllJobs from "../../../utils/getAllJobs";
 
 
 const HomePage = () => {
-    const jobs=getAllJob()
+    const jobs=getAllJobs()
     console.log(jobs);
     return (
         <div className="my-container  my-20">

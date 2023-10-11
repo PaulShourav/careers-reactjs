@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-const getAllJob = () => {
+const getAllJobs = () => {
     const [jobs,setJobs]=useState([])
     useEffect(()=>{
        fetch('http://localhost:5000/jobs/')
@@ -11,4 +11,4 @@ const getAllJob = () => {
     return jobs;
 };
 
-export default getAllJob;
+export default getAllJobs;
