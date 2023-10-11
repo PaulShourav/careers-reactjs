@@ -24,8 +24,6 @@ const SignInAndUpPage = () => {
                         <SignUpForm/>
                     </div>
 
-
-
                 </div>
                 
 
