@@ -3,9 +3,10 @@ import HomeLayout from '../views/layouts/HomeLayout';
 import DashboardLayout from '../views/layouts/DashboardLayout';
 import HomePage from '../views/home/home/HomePage';
 import SignInAndUpPage from '../views/home/signInAndUp/SignInAndUpPage';
-import JobDetailsPage from '../views/home/joddetails/JobDetailsPage';
+import JobDetailsPage from '../views/home/jobdetails/JobDetailsPage';
 import UserPage from '../views/dashboard/user/UserPage';
-import JobsPage from '../views/dashboard/viewJobs/JobsPage';
+import JobsPage from '../views/dashboard/Jobs/viewJobs/JobsPage';
+import AddJobPage from '../views/dashboard/Jobs/addJob/AddJobPage';
 
 const router=createBrowserRouter([
     {
@@ -37,8 +38,12 @@ const router=createBrowserRouter([
             element:<UserPage/>
            },
            {
-            path:'/dashboard/job',
+            path:'/dashboard/jobs',
             element:<JobsPage/>
+           },
+           {
+            path:'/dashboard/job/add',
+            element:<AddJobPage/>
            }
         ]
     }

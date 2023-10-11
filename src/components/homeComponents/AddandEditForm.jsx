@@ -1,13 +1,13 @@
-"use client"
+
 import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/themes/material_blue.css';
 import { useEffect, useRef, useState } from "react";
 import 'flatpickr/dist/flatpickr.min.css';
-import TextEditor from "@/components/TextEditor";
 import { useForm } from "react-hook-form";
-import SelectMultiTnput from "@/components/SelectMultiTnput";
-import slugGenerate from "@/utilis/slugGenerate";
 import toast from "react-hot-toast";
+import slugGenerate from '../../utils/slugGenerate';
+import TextEditor from '../common/TextEditor';
+import SelectMultiTnput from '../common/SelectMultiTnput';
 
 const AddandEditForm = ({ editJobData, setEditJobData }) => {
     const editData = editJobData || null;
