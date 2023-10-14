@@ -2,6 +2,7 @@ import { useState } from "react";
 import SignInForm from "../../../components/homeComponents/SignInForm";
 import SignInUpTab from "../../../components/homeComponents/SignInUpTab";
 import SignUpForm from "../../../components/homeComponents/SignUpForm";
+import HeadingSignInUp from "../../../components/homeComponents/HeadingSignInUp";
 
 
 const SignInAndUpPage = () => {
@@ -9,23 +10,22 @@ const SignInAndUpPage = () => {
     return (
         <div className="my-container">
             <SignInUpTab tabActive={tabActive} setTabActive={setTabActive} />
-            <div>
-                
-                <div className='flex items-center justify-center mt-12 '>
-                    <div className="basis-1/2 flex items-center justify-center">
-                        {/* <Lottie animationData={signInLottie} style={{ width: '350px' }} loop={true} /> */}
-                    </div>
+            <div className="flex justify-center">
+
+                <div className='bg-transparent md:bg-white md:shadow-lg md:shadow-indigo-500 w-full md:w-[700px] rounded-md my-12 '>
                     {/* Sign in */}
-                    <div className={`basis-1/2   ${tabActive == 'signup' ? 'hidden' : ''}`}>
-                        <SignInForm/>
+                    <div className={`px-7 py-9  ${tabActive == 'signup' ? 'hidden' : ''}`}>
+                    <HeadingSignInUp headingtTitle={'Login'} />
+                        <SignInForm />
                     </div>
                     {/* Sign up */}
-                    <div className={`basis-1/2 ${tabActive == 'signin' ? 'hidden' : ''}`}>
-                        <SignUpForm/>
+                    <div className={`px-7 py-9 ${tabActive == 'signin' ? 'hidden' : ''}`}>
+                        <HeadingSignInUp headingtTitle={'Register'} />
+                        <SignUpForm setTabActive={setTabActive}/>
                     </div>
 
                 </div>
-                
+
 
             </div>
         </div>

@@ -5,6 +5,9 @@
 .my-container{
     @apply px-2 md:max-w-screen-md md:px-5 lg:max-w-screen-lg  mx-auto
 }
+input{
+  @apply bg-transparent
+}
 @keyframes custom-animation {
     from {
       transform: translateX(-100%);

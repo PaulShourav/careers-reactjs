@@ -36,9 +36,9 @@ const SignInForm = () => {
           });
     }
     return (
-        <form onSubmit={handleSubmit(handleSignIn)} className="space-y-4">
-            <div>
-            <div className=" flex w-full md:w-80 items-center border rounded-md p-2">
+        <form onSubmit={handleSubmit(handleSignIn)} className="space-y-4 px-12">
+            <div >
+            <div className=" flex w-full  items-center border rounded-md p-2">
                 <span className="mr-2"><FaEnvelope /></span>
                 <input type="text" {...register("email", { required: true })} placeholder='Enter your email' className="w-full focus:outline-none" />
             </div>
@@ -47,7 +47,7 @@ const SignInForm = () => {
                 )}
             </div>
             <div>
-            <div className="flex w-full md:w-80 items-center border rounded-md p-2">
+            <div className="flex w-full  items-center border rounded-md p-2">
                 <span className="mr-2"><FaLock /></span>
                 <input type="text" {...register("password", {required: true })} placeholder='Password' className="w-full focus:outline-none" />
             </div>
