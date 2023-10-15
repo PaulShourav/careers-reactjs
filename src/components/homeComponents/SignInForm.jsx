@@ -2,11 +2,15 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock, } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
     const {register,handleSubmit,reset,formState: { errors }} = useForm();
     const {user,signIn}=useAuth()
-   
+    const navigate = useNavigate()
+    const location = useLocation()
+    const currentLocation = location?.state?.from?.pathname || '/'
+   console.log(currentLocation);
 
     const handleSignIn = ({email,password}) => {
         console.log(email,password);
@@ -14,22 +18,23 @@ const SignInForm = () => {
         .then((result) => {
             
             reset()
-            const loggedUser={
-                email:result.user.email
-            }
-            fetch('http://localhost:5000/jwt',{
-                method:"POST",
-                headers:{
-                    'content-type':'application/json'
-                },
-                body:JSON.stringify(loggedUser)
-            })
-            .then(res=>res.json())
-            .then(data=>{
-                console.log('jet..',data);
-                localStorage.setItem('careers-access-token',data.token)
+            navigate(currentLocation,{replace:true})
+            // const loggedUser={
+            //     email:result.user.email
+            // }
+            // fetch('http://localhost:5000/jwt',{
+            //     method:"POST",
+            //     headers:{
+            //         'content-type':'application/json'
+            //     },
+            //     body:JSON.stringify(loggedUser)
+            // })
+            // .then(res=>res.json())
+            // .then(data=>{
+            //     console.log('jet..',data);
+            //     localStorage.setItem('careers-access-token',data.token)
                
-            })
+            // })
           })
           .catch((error) => {
             console.log(error);

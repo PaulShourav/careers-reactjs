@@ -8,7 +8,7 @@ import AuthContext from "../contexts/AuthContext";
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [isloading, setIsLoading] = useState(true);
 
     const signUp = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -22,14 +22,14 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
-            setLoading(false);
+            setIsLoading(false);
         });
 
         return () => unsubscribe();
     }, []);
     const value = {
         user,
-        loading,
+        isloading,
         signUp,
         signIn,
         logout

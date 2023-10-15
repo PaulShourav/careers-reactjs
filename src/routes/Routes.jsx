@@ -7,6 +7,8 @@ import JobDetailsPage from '../views/home/jobdetails/JobDetailsPage';
 import UserPage from '../views/dashboard/user/UserPage';
 import JobsPage from '../views/dashboard/Jobs/viewJobs/JobsPage';
 import AddJobPage from '../views/dashboard/Jobs/addJob/AddJobPage';
+import AdminRoute from './AdminRoute';
+import PrivateRoute from './PrivateRoute';
 
 const router=createBrowserRouter([
     {
@@ -31,19 +33,19 @@ const router=createBrowserRouter([
     },
     {
         path:"dashboard",
-        element:<DashboardLayout/>,
+        element:<PrivateRoute><DashboardLayout/></PrivateRoute>,
         children:[
            {
             path:'/dashboard/users',
-            element:<UserPage/>
+            element:<AdminRoute><UserPage/></AdminRoute>
            },
            {
             path:'/dashboard/jobs',
-            element:<JobsPage/>
+            element:<AdminRoute><JobsPage/></AdminRoute>
            },
            {
             path:'/dashboard/job/add',
-            element:<AddJobPage/>
+            element:<AdminRoute><AddJobPage/></AdminRoute>
            }
         ]
     }
