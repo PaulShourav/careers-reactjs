@@ -8,7 +8,7 @@ import AuthContext from "../contexts/AuthContext";
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [isloading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const signUp = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
     const logout=()=>{
+        setIsLoading(false)
        return signOut(auth)
     }
     useEffect(() => {
@@ -29,7 +30,7 @@ const AuthProvider = ({ children }) => {
     }, []);
     const value = {
         user,
-        isloading,
+        isLoading,
         signUp,
         signIn,
         logout

@@ -1,8 +1,15 @@
 import { FaCirclePlus } from "react-icons/fa6";
+import useAuth from "../../hooks/useAuth";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const JobDetails = ({ job }) => {
-
-    const { longTitle, location, jobResponsibilities, educationalRequirements, experienceRequirements } = job || {};
+    const {_id,slug, longTitle, location, jobResponsibilities, educationalRequirements, experienceRequirements } = job || {};
+    const {user}=useAuth()
+    const navigate=useNavigate()
+    const urlLocation=useLocation()
+    
     const benefits = [
         'Yearly 3 times Salary Reviews/Increment',
         'Weekly 2 Holidays',
@@ -18,6 +25,31 @@ const JobDetails = ({ job }) => {
         'Weekly Sports Day',
         'Annual Tour'
     ]
+
+  
+    const storeAppliedJob=(newData)=>{
+        fetch('http://localhost:5000/appliedJob',{
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify(newData)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                toast.success(data.message),
+                console.log(data)
+            })
+    }
+    const handleApplyJob=(_id,slug)=>{
+        const newData={email:user?.email,jobId:_id,slug:slug}
+        if (!user) {
+            navigate('/signin')
+        }else(
+            storeAppliedJob(newData),
+            navigate('/')
+        )
+    }
     return (
         <>
             <div className="mb-10">
@@ -61,7 +93,7 @@ const JobDetails = ({ job }) => {
                 <p className="font-bold text-2xl">Location:</p>
                 <p className="mt-3 text-justify">{location}</p>
             </div>
-            <button className="btn btn-primary px-5">Apply Now</button>
+            <button className="btn btn-primary px-5" onClick={()=>handleApplyJob(_id,slug)}>Apply Now</button>
         </>
     );
 };

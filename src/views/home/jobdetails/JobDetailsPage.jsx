@@ -6,9 +6,8 @@ import getJobById from "../../../utils/getJobById";
 
 
 const JobDetailsPage = () => {
-    const slug = useParams()
+    const {slug} = useParams()
     const job = getJobById(slug)
-
     return (
         <section className="my-container my-24">
             <div className="flex gap-0 md:gap-7 ">

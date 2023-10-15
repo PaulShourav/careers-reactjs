@@ -6,8 +6,8 @@ import Loading from "../../components/common/Loading";
 
 
 const HomeLayout = () => {
-    const {user}=useAuth()
-    if (!user) {
+    const {isLoading}=useAuth()
+    if (isLoading) {
         return <Loading/>
     }
     return (
