@@ -42,7 +42,7 @@ const JobDetails = ({ job }) => {
             })
     }
     const handleApplyJob=(_id,slug)=>{
-        const newData={email:user?.email,jobId:_id,slug:slug}
+        const newData={email:user?.email,job:_id,slug:slug}
         if (!user) {
             navigate('/signin')
         }else(
