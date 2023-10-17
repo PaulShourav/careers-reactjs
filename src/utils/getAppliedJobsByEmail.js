@@ -1,19 +1,13 @@
-import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
+import useSWR from "swr";
 
 
 const getAppliedJobsByEmail = () => {
     const { user } = useAuth()
-    const [appliedJobs, setAppliedJobs] = useState([])
-    useEffect(() => {
-        if (user) {
-            fetch(`http://localhost:5000/appliedJob?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setAppliedJobs(data))
-        }
-
-    }, [])
-    return { appliedJobs };
+    const fetcher = (...args) => fetch(...args).then(res => res.json())
+    const { data: appliedJobs = [],mutate } = useSWR(`http://localhost:5000/appliedJob?email=${user?.email}`, fetcher);
+ 
+    return { appliedJobs,mutate };
 };
 
 export default getAppliedJobsByEmail;

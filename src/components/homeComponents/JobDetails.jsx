@@ -3,13 +3,14 @@ import useAuth from "../../hooks/useAuth";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import getAppliedJobsByEmail from "../../utils/getAppliedJobsByEmail";
 
 const JobDetails = ({ job }) => {
-    const {_id,slug, longTitle, location, jobResponsibilities, educationalRequirements, experienceRequirements } = job || {};
-    const {user}=useAuth()
-    const navigate=useNavigate()
-    const urlLocation=useLocation()
-    
+    const { _id, slug, longTitle, location, jobResponsibilities, educationalRequirements, experienceRequirements } = job || {};
+    const { user } = useAuth()
+    const navigate = useNavigate()
+    const { mutate } = getAppliedJobsByEmail()
+
     const benefits = [
         'Yearly 3 times Salary Reviews/Increment',
         'Weekly 2 Holidays',
@@ -26,28 +27,29 @@ const JobDetails = ({ job }) => {
         'Annual Tour'
     ]
 
-  
-    const storeAppliedJob=(newData)=>{
-        fetch('http://localhost:5000/appliedJob',{
-                method:"POST",
-                headers:{
-                    "content-type":"application/json"
-                },
-                body:JSON.stringify(newData)
-            })
-            .then(res=>res.json())
-            .then(data=>{
+
+    const storeAppliedJob = (newData) => {
+        fetch('http://localhost:5000/appliedJob', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(newData)
+        })
+            .then(res => res.json())
+            .then(data => {
                 toast.success(data.message),
-                console.log(data)
+                mutate(),
+                navigate('/')
             })
     }
-    const handleApplyJob=(_id,slug)=>{
-        const newData={email:user?.email,job:_id,slug:slug}
+    const handleApplyJob = (_id, slug) => {
+        const newData = { email: user?.email, job: _id, slug: slug }
         if (!user) {
             navigate('/signin')
-        }else(
-            storeAppliedJob(newData),
-            navigate('/')
+        } else (
+            storeAppliedJob(newData)
+           
         )
     }
     return (
@@ -93,7 +95,7 @@ const JobDetails = ({ job }) => {
                 <p className="font-bold text-2xl">Location:</p>
                 <p className="mt-3 text-justify">{location}</p>
             </div>
-            <button className="btn btn-primary px-5" onClick={()=>handleApplyJob(_id,slug)}>Apply Now</button>
+            <button className="btn btn-primary px-5" onClick={() => handleApplyJob(_id, slug)}>Apply Now</button>
         </>
     );
 };
