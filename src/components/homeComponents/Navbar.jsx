@@ -1,6 +1,6 @@
 
 import { FiSearch } from "react-icons/fi";
-import { FaAngleDown, FaAngleUp, FaArrowRightFromBracket } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp, FaArrowRightFromBracket, FaUserShield } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
@@ -22,7 +22,7 @@ const Navbar = () => {
         <li><Link to={'/'}>Contact</Link></li>
     </>
     const beforeSignInNavLink = <>
-        <li><Link to={'/signin'}>Singin/Up</Link></li>
+        <li><Link className="btn btn-sm btn-outline btn-primary focus-within:bg-indigo-200 rounded-full" to={'/signin'}><FaUserShield/> Singin/Up</Link></li>
     </>
     const afterSignInNavLink = <>
         <li>
