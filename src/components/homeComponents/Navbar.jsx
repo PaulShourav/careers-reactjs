@@ -1,6 +1,6 @@
 
 import { FiSearch } from "react-icons/fi";
-import { FaAngleDown, FaAngleUp, FaArrowRightFromBracket, FaUserShield } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp, FaArrowRightFromBracket, FaHouse, FaUserShield } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
@@ -35,8 +35,8 @@ const Navbar = () => {
                     </div>
                     <span className="pe-1">{isOpenDropdown ? <FaAngleDown /> : <FaAngleUp />}</span></label>
                 {
-                    isOpenDropdown && <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border-e border-indigo-400 animate-custom mt-3 w-52">
-                        <li><a>Item 1</a></li>
+                    isOpenDropdown && <ul tabIndex={0} onClick={() => setIsOpenDropdown(!isOpenDropdown)} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border-e border-indigo-400 animate-custom mt-3 w-52">
+                        <li><Link to={'/user/setting'}><FaHouse/> Dashboard</Link></li>
                         <li>
                             <button onClick={()=>handleLogout()} className="flex items-center space-x-2px-4"><FaArrowRightFromBracket /><span>Logout</span>
                             </button>

@@ -6,7 +6,6 @@ import getAppliedJobsByEmail from "../../../utils/getAppliedJobsByEmail";
 const HomePage = () => {
     const { jobs } = getAllJobs()
     const { appliedJobs } = getAppliedJobsByEmail()
-console.log(appliedJobs);
     return (
         <>
             {

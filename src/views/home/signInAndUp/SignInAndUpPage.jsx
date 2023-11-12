@@ -3,10 +3,17 @@ import SignInForm from "../../../components/homeComponents/SignInForm";
 import SignInUpTab from "../../../components/homeComponents/SignInUpTab";
 import SignUpForm from "../../../components/homeComponents/SignUpForm";
 import HeadingSignInUp from "../../../components/homeComponents/HeadingSignInUp";
+import useAuth from "../../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
 
 
 const SignInAndUpPage = () => {
     const [tabActive, setTabActive] = useState('signin')
+    const {user}=useAuth()
+    // if user sign in then retun home page
+    if (user) {
+        return <Navigate to={'/'}/>
+    }
     return (
         <div className="my-container">
             <SignInUpTab tabActive={tabActive} setTabActive={setTabActive} />
