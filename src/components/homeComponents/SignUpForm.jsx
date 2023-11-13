@@ -8,20 +8,22 @@ import useAdminUser from "../../hooks/useAdminUser";
 const SignUpForm = ({ setTabActive }) => {
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const { signUp } = useAuth()
-    const [adminUser,isAdminLoading]=useAdminUser()
+    const [adminUser, isAdminLoading] = useAdminUser()
     const password = watch("password");
-    const resumeFile = watch("resumeFile") || true;
-   console.log(isAdminLoading,adminUser);
+    const file = watch("resumeFile") || true;
+
     const handleSignUp = (data) => {
-        //Set only file Name
+        const formData = new FormData();
+        formData.append("file", data.resumeFile[0]);
         data['resumeFile']=data.resumeFile[0].name;
+        formData.append("newData", JSON.stringify(data));
        
-        //Sign up using Firebase authentication
+        // Sign up using Firebase authentication
         signUp(data.email, data.password)
             .then((userCredential) => {
                 //Store data in database
-                handleAddUser(data)
 
+                handleAddUser(formData)
             })
             .catch((error) => {
                 console.log(error.message);
@@ -29,14 +31,10 @@ const SignUpForm = ({ setTabActive }) => {
 
             });
     }
-    const handleAddUser = (data) => {
-        // const newData={}
+    const handleAddUser = (formData) => {
         fetch('http://localhost:5000/users', {
             method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(data)
+            body: formData
         },)
             .then(res => res.json())
             .then(data => {
@@ -133,7 +131,7 @@ const SignUpForm = ({ setTabActive }) => {
                         <label htmlFor="fileInput" className="bg-white border-dashed border-2 border-indigo-600 px-4 py-6 rounded-lg shadow-lg cursor-pointer  w-full">
                             <div className="flex flex-col items-center text-center">
                                 {
-                                    resumeFile?.length === 0 ? <> <span className="text-2xl text-indigo-500"><FaBoxOpen /></span>
+                                    file?.length === 0 ? <> <span className="text-2xl text-indigo-500"><FaBoxOpen /></span>
                                         <span className="text-lg font-semibold py-2">Drag and drop or Browse</span>
                                         <span className="text-slate-300">Please upload your cv or resume only in word document or pdf file with your photography in it.</span></> : <><span className="text-2xl text-white bg-indigo-300 rounded-full p-4 "><FaFileImport /></span>
                                         <span className="text-lg font-semibold text-gray-400 py-2">Resume File</span></>

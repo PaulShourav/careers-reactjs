@@ -37,7 +37,7 @@ const router=createBrowserRouter([
     },
     {
         path:"dashboard",
-        element:<PrivateRoute><DashboardLayout/></PrivateRoute>,
+        element:<PrivateRoute><AdminRoute><DashboardLayout/></AdminRoute></PrivateRoute>,
         children:[
            {
             path:'/dashboard/users',
