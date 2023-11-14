@@ -3,17 +3,42 @@ import useAuth from "../../hooks/useAuth";
 import useCandidateUser from "../../hooks/useCandidateUser";
 import { useForm } from "react-hook-form";
 import { FaBoxOpen, FaEnvelope, FaFileImport, FaLock, FaPhone, FaUserLarge, } from "react-icons/fa6";
+import toast from "react-hot-toast";
+
 
 
 const Profile = () => {
     const [candidateUser]=useCandidateUser()
-    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
+console.log(candidateUser);
+    const { register, handleSubmit, reset,setValue, watch, formState: { errors } } = useForm();
     const file = watch("resumeFile") || true;
-    const handleUpdateProfile=()=>{
-
+    if(candidateUser){
+        setValue('_id',candidateUser._id)
+        setValue('name',candidateUser.name)
+        setValue('email',candidateUser.email)
+        setValue('phoneNumber',candidateUser.phoneNumber)
+        candidateUser.gender=='male'? document.getElementById('male').checked=true :''
+        candidateUser.gender=='female'? document.getElementById('female').checked=true :''
+      
+    }
+    const handleUpdateProfile=(data)=>{
+        const formData = new FormData();
+        formData.append("file", data.resumeFile[0]);
+        data['resumeFile']=data.resumeFile[0]?.name;
+        formData.append("newData", JSON.stringify(data));
+        fetch('http://localhost:5000/users/update', {
+            method: "PATCH",
+            body: formData
+        },)
+            .then(res => res.json())
+            .then(data => {
+                toast.success(`${data.message}`)
+                reset()
+            })
     }
     return (
         <form onSubmit={handleSubmit(handleUpdateProfile)} className="space-y-4">
+            <input type="hidden" {...register("_id")} />
                 <div >
                     <div className="flex items-center border rounded-md p-2">
                         <span className="mr-2"><FaUserLarge /></span>
@@ -25,67 +50,36 @@ const Profile = () => {
                 </div>
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="w-full md:basis-1/2">
-                        <div className="flex items-center border rounded-md p-2">
+                        <div className="flex items-center border rounded-md p-2 opacity-50">
                             <span className="mr-2"><FaEnvelope /></span>
-                            <input type="text" {...register("email", { required: true })} placeholder='Enter your email' className="w-full focus:outline-none" />
+                            <input type="text" {...register("email", { required: true })} placeholder='Enter your email' className="w-full focus:outline-none" disabled />
                         </div>
-                        {errors.email?.type === "required" && (
-                            <p className="text-red-400">Email field is required</p>
-                        )}
+                        
                     </div>
                     <div className="w-full md:basis-1/2">
-                        <div className="flex items-center border rounded-md p-2">
+                        <div className="flex items-center border rounded-md p-2 opacity-50">
                             <span className="mr-2"><FaPhone /></span>
                             <input type="number" {...register("phoneNumber", {
                                 required: true, pattern: {
                                     value: /^\d{11}$/,
                                     message: 'Please enter a valid 11-digit mobile number',
                                 }
-                            })} placeholder='Enter Your Phone Number' className="w-full focus:outline-none" />
+                            } )} placeholder='Enter Your Phone Number' className="w-full focus:outline-none" disabled />
                         </div>
-                        {errors.phoneNumber?.type === "required" && (
-                            <p className="text-red-400">Email field is required</p>
-                        )}
-                        {errors.phoneNumber?.type === "pattern" && (
-                            <p className="text-red-400">{errors.phoneNumber.message}</p>
-                        )}
-                    </div>
-                </div>
-                <div className="flex flex-col md:flex-row gap-4">
-                    <div className="w-full md:basis-1/2">
-                        <div className="flex items-center border rounded-md p-2">
-                            <span className="mr-2"><FaLock /></span>
-                            <input type="password" {...register("password", { required: true })} placeholder='Password' className="w-full focus:outline-none" />
-                        </div>
-                        {errors.password?.type === "required" && (
-                            <p className="text-red-400">Email field is required</p>
-                        )}
-                    </div>
-                    <div className="w-full md:basis-1/2">
-                        <div className="flex items-center border rounded-md p-2">
-                            <span className="mr-2"><FaLock /></span>
-                            <input type="password" {...register("confirmPassword", { required: true, validate: (value) => value == password || "Passwords do not match", })} placeholder='Re-Type Password' className="w-full focus:outline-none" />
-                        </div>
-                        {errors.confirmPassword?.type === "required" && (
-                            <p className="text-red-400">Email field is required</p>
-                        )}
-                        {errors.confirmPassword && (
-                            <p className="text-red-400">{errors.confirmPassword.message
-                            }</p>
-                        )}
+                        
                     </div>
                 </div>
                 <div>
                     <div className="flex gap-9">
                         <div className="form-control">
                             <label className="flex items-center gap-2">
-                                <input type="radio" {...register('gender', { required: "Please select gender.", value: "male" })} name="radio-10" className="radio checked:bg-blue-500" />
+                                <input type="radio" value='male' {...register('gender', { required: "Please select gender."})}  id="male" className="radio radio-primary"   />
                                 <span className="label-text">Male</span>
                             </label>
                         </div>
                         <div className="form-control">
                             <label className="flex items-center gap-2">
-                                <input type="radio" {...register('gender', { required: "Please select gender.", value: "female" })} name="radio-10" className="radio checked:bg-blue-500" />
+                                <input type="radio" value='female' {...register('gender', { required: "Please select gender."})}  id="female"  className="radio radio-primary" />
                                 <span className="label-text">Female</span>
                             </label>
                         </div>
@@ -110,16 +104,16 @@ const Profile = () => {
                                 id="fileInput"
                                 className="hidden"
                                 accept="image/pdf/*"
-                                {...register('resumeFile', { required: "Drag or drop a file." })}
+                                {...register('resumeFile')}
 
                             />
                         </label>
                     </div>
-                    {errors.resumeFile?.type === "required" && (
-                        <p className="text-red-400">{errors.resumeFile.message}</p>
-                    )}
+                   
+                    <a href={`file:///D:/Next%20Js%20Projects/careers/careers-server/uploads/${candidateUser?.resumeFile}`} className="link link-primary" target="_blank">Your Resume</a>
                 </div>
-                <button type="submit" className="btn btn-sm btn-primary rounded-full px-8">Sign Up</button>
+                
+                <button type="submit" className="btn btn-sm btn-primary rounded-full px-8">Update</button>
             </form>
     );
 };
