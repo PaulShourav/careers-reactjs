@@ -4,7 +4,7 @@ import { FaCircleInfo } from "react-icons/fa6";
 const JobCard = ({job,indexNo}) => {
     const {slug,title,experience,salary}=job 
     return (
-        <div className="flex flex-col md:flex-row items-start md:items-center   bg-gray-300 p-4 rounded-lg mb-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center   bg-zinc-200 p-4 rounded-lg mb-6 shadow-lg shadow-indigo-500">
             <div>
                 <p className="font-bold border border-indigo-400 rounded-full p-3">{indexNo+1}</p>
             </div>

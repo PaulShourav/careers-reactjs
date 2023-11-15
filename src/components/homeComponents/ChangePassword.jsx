@@ -4,13 +4,14 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const ChangePassword = () => {
-    const { updateUserPassword } = useAuth()
+    const {user, updateUserPassword } = useAuth()
+    console.log(user);
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
-    const newPassword = watch("newPassword");
+    const newPassword = watch("password");
 
-    const handleUpdatePassword = ({ newPassword }) => {
-        console.log(newPassword);
-        updateUserPassword(newPassword)
+    const handleUpdatePassword = (data ) => {
+       
+        updateUserPassword(data.password)
             .then(() => {
                 toast.success('Successfully password updated.')
                 reset()
@@ -26,16 +27,16 @@ const ChangePassword = () => {
             <div>
                 <div className="flex w-full  items-center border rounded-md p-2">
                     <span className="mr-2"><FaLock /></span>
-                    <input type="text" {...register("newPassword", { required: true })} placeholder='Password' className="w-full focus:outline-none" />
+                    <input type="password" {...register("password", { required: true })} placeholder='Password' className="w-full focus:outline-none" />
                 </div>
-                {errors.newPassword?.type === "required" && (
+                {errors.password?.type === "required" && (
                     <p className="text-red-400">Please enter a password.</p>
                 )}
             </div>
             <div>
                 <div className="flex w-full  items-center border rounded-md p-2">
                     <span className="mr-2"><FaLock /></span>
-                    <input type="text" {...register("confirmPassword", { required: true, validate: (value) => value == newPassword || "Passwords do not match", })} placeholder='Confirm Password' className="w-full focus:outline-none" />
+                    <input type="password" {...register("confirmPassword", { required: true, validate: (value) => value == newPassword || "Passwords do not match", })} placeholder='Confirm Password' className="w-full focus:outline-none" />
                 </div>
                 {errors.confrimPassword?.type === "required" && (
                     <p className="text-red-400">Please enter a password.</p>

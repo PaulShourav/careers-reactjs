@@ -5,10 +5,16 @@ import useAuth from "../../hooks/useAuth";
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from "react";
 import profilePic from '../../assets/images/profile.jpg'
+import useCandidateUser from "../../hooks/useCandidateUser";
+import useAdminUser from "../../hooks/useAdminUser";
 
 const Navbar = () => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false)
     const { user, logout,loading } = useAuth()
+    const {candidateUser}=useCandidateUser()
+    const {adminUser}=useAdminUser()
+    console.log(candidateUser);
+    console.log(adminUser);
     const handleLogout=()=>{
         logout()
         .then(()=>{
@@ -22,12 +28,12 @@ const Navbar = () => {
         <li><Link to={'/'}>Contact</Link></li>
     </>
     const beforeSignInNavLink = <>
-        <li><NavLink  to={'/signin'} className={({isActive})=>isActive?'active-link':'btn btn-sm btn-outline btn-primary rounded-full'}><FaUserShield/> Singin/Up</NavLink></li>
+        <li><NavLink  to={'/signin'} className={({isActive})=>isActive?'active-link-signin':'btn btn-sm btn-outline btn-primary rounded-full'}><FaUserShield/> Singin/Up</NavLink></li>
     </>
     const afterSignInNavLink = <>
         <li>
             <div className="dropdown dropdown-bottom dropdown-end">
-                <label tabIndex={0} onClick={() => setIsOpenDropdown(!isOpenDropdown)} className={`flex items-center  justify-center gap-8 border border-indigo-700 rounded-full p-[3px] ${isOpenDropdown?'bg-indigo-300':''}`}>
+                <label tabIndex={0} onClick={() => setIsOpenDropdown(!isOpenDropdown)} className={`flex items-center  justify-center gap-8 border border-indigo-700 rounded-full p-[3px] ${isOpenDropdown?'bg-primary text-white':''}`}>
                     <div className="avatar">
                         <div className="w-7 rounded-full">
                             <img src={profilePic} alt="profile" width={28} height={28} />
@@ -35,8 +41,8 @@ const Navbar = () => {
                     </div>
                     <span className="pe-1">{isOpenDropdown ? <FaAngleDown /> : <FaAngleUp />}</span></label>
                 {
-                    isOpenDropdown && <ul tabIndex={0} onClick={() => setIsOpenDropdown(!isOpenDropdown)} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border-e border-indigo-400 animate-custom mt-3 w-52">
-                        <li><Link to={'/user/setting'}><FaHouse/> Dashboard</Link></li>
+                    isOpenDropdown && <ul tabIndex={0} onClick={() => setIsOpenDropdown(!isOpenDropdown)} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 border-e border-indigo-400 animate-custom mt-3 w-52 ">
+                        <li><NavLink  to={`${candidateUser?'/user/setting':'dashboard'}`} className={({isActive})=>isActive?'active-link':''}><FaHouse/> Dashboard</NavLink></li>
                         <li>
                             <button onClick={()=>handleLogout()} className="flex items-center space-x-2px-4"><FaArrowRightFromBracket /><span>Logout</span>
                             </button>
@@ -51,7 +57,7 @@ const Navbar = () => {
     const navLink = user? afterSignInNavLink : beforeSignInNavLink;
     return (
         <div className="my-container">
-            <p className="flex  justify-center text-xl md:text-3xl font-bold pt-4 md:py-8">Career Website</p>
+            <p className="flex  justify-center text-xl md:text-2xl font-bold pt-4 md:py-8"><span className="text-green-500">BD</span>-TECH SOLUATION</p>
 
             <div className="navbar min-h-[40px] bg-base-100 py-1 border-b border-indigo-200">
                 <div className="navbar-start">

@@ -9,18 +9,20 @@ import toast from "react-hot-toast";
 
 const Profile = () => {
     const {candidateUser,mutate}=useCandidateUser()
-
     const { register, handleSubmit, reset,setValue, watch, formState: { errors } } = useForm();
     const file = watch("resumeFile") || true;
-    if(candidateUser){
-        setValue('_id',candidateUser._id)
-        setValue('name',candidateUser.name)
-        setValue('email',candidateUser.email)
-        setValue('phoneNumber',candidateUser.phoneNumber)
-        candidateUser?.gender=='male'? document.getElementById('male').checked=true :''
-        candidateUser?.gender=='female'? document.getElementById('female').checked=true :''
-      
-    }
+    useEffect(()=>{
+        if(candidateUser){
+            setValue('_id',candidateUser._id)
+            setValue('name',candidateUser.name)
+            setValue('email',candidateUser.email)
+            setValue('phoneNumber',candidateUser.phoneNumber)
+            candidateUser?.gender=='male'? document.getElementById('male').checked=true :''
+            candidateUser?.gender=='female'? document.getElementById('female').checked=true :''
+          
+        }
+    },[candidateUser])
+   
     const handleUpdateProfile=(data)=>{
         console.log(data);
         const formData = new FormData();

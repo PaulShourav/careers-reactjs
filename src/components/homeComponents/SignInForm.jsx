@@ -45,7 +45,7 @@ const SignInForm = () => {
             <div >
             <div className=" flex w-full  items-center border rounded-md p-2">
                 <span className="mr-2"><FaEnvelope /></span>
-                <input type="text" {...register("email", { required: true })} placeholder='Enter your email' className="w-full focus:outline-none" />
+                <input type="text" {...register("email", { required: true })} placeholder='Enter your email' className="w-full  focus:outline-none" />
             </div>
             {errors.email?.type === "required" && (
                     <p className="text-red-400">Email field is required</p>
@@ -54,7 +54,7 @@ const SignInForm = () => {
             <div>
             <div className="flex w-full  items-center border rounded-md p-2">
                 <span className="mr-2"><FaLock /></span>
-                <input type="text" {...register("password", {required: true })} placeholder='Password' className="w-full focus:outline-none" />
+                <input type="password" {...register("password", {required: true })} placeholder='Password' className="w-full focus:outline-none" />
             </div>
             {errors.password?.type === "required" && (
                     <p className="text-red-400">Please enter a password.</p>

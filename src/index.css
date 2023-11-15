@@ -5,9 +5,9 @@
 .my-container{
     @apply px-2 md:max-w-screen-md md:px-5 lg:max-w-screen-lg  mx-auto
 }
-input{
-  @apply bg-transparent
-}
+/* input{
+  @apply 
+} */
 @keyframes custom-animation {
     from {
       transform: translateX(-100%);
@@ -22,6 +22,9 @@ input{
   .animate-custom {
     animation: custom-animation 0.5s ease-in-out;
   }
-  .active-link{
+  .active-link-signin{
     @apply  btn btn-sm btn-primary rounded-full
+  }
+  .active-link{
+    @apply  border-b-2 border-red-700 pb-[11px] font-bold
   }

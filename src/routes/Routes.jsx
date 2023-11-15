@@ -10,6 +10,8 @@ import AddJobPage from '../views/dashboard/Jobs/addJob/AddJobPage';
 import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 import UserDashboardPage from '../views/home/userDashboard/UserDashboardPage';
+import CandidateRoute from './CandidateRoute';
+
 
 const router=createBrowserRouter([
     {
@@ -31,7 +33,7 @@ const router=createBrowserRouter([
             },
             {
                 path:'/user/setting',
-                element:<PrivateRoute><UserDashboardPage/></PrivateRoute>
+                element:<PrivateRoute><CandidateRoute><UserDashboardPage/></CandidateRoute></PrivateRoute>
                }
         ]
     },

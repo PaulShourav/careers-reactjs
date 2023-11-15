@@ -2,13 +2,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FaBoxOpen, FaEnvelope, FaFileImport, FaLock, FaPhone, FaUserLarge, } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
-import useAdminUser from "../../hooks/useAdminUser";
+
 
 
 const SignUpForm = ({ setTabActive }) => {
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const { signUp } = useAuth()
-    const [adminUser, isAdminLoading] = useAdminUser()
     const password = watch("password");
     const file = watch("resumeFile") || true;
 
