@@ -2,7 +2,7 @@
 import { FiSearch } from "react-icons/fi";
 import { FaAngleDown, FaAngleUp, FaArrowRightFromBracket, FaHouse, FaUserShield } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useState } from "react";
 import profilePic from '../../assets/images/profile.jpg'
 
@@ -18,11 +18,11 @@ const Navbar = () => {
         
     }
     const commonNavLink = <>
-        <li><Link to={'/'}>Home</Link></li>
+        <li><NavLink to={'/'} className={({isActive})=>isActive?'active-link':''}>Home</NavLink></li>
         <li><Link to={'/'}>Contact</Link></li>
     </>
     const beforeSignInNavLink = <>
-        <li><Link className="btn btn-sm btn-outline btn-primary focus-within:bg-indigo-200 rounded-full" to={'/signin'}><FaUserShield/> Singin/Up</Link></li>
+        <li><NavLink  to={'/signin'} className={({isActive})=>isActive?'active-link':'btn btn-sm btn-outline btn-primary rounded-full'}><FaUserShield/> Singin/Up</NavLink></li>
     </>
     const afterSignInNavLink = <>
         <li>

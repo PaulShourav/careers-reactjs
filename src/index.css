@@ -22,4 +22,6 @@ input{
   .animate-custom {
     animation: custom-animation 0.5s ease-in-out;
   }
-  
+  .active-link{
+    @apply  btn btn-sm btn-primary rounded-full
+  }
