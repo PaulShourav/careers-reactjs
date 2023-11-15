@@ -27,7 +27,7 @@ const Navbar = () => {
     const afterSignInNavLink = <>
         <li>
             <div className="dropdown dropdown-bottom dropdown-end">
-                <label tabIndex={0} onClick={() => setIsOpenDropdown(!isOpenDropdown)} className="flex items-center justify-center gap-3 border border-indigo-500 rounded-full p-[2px] bg-slate-200">
+                <label tabIndex={0} onClick={() => setIsOpenDropdown(!isOpenDropdown)} className={`flex items-center  justify-center gap-8 border border-indigo-700 rounded-full p-[3px] ${isOpenDropdown?'bg-indigo-300':''}`}>
                     <div className="avatar">
                         <div className="w-7 rounded-full">
                             <img src={profilePic} alt="profile" width={28} height={28} />
@@ -53,7 +53,7 @@ const Navbar = () => {
         <div className="my-container">
             <p className="flex  justify-center text-xl md:text-3xl font-bold pt-4 md:py-8">Career Website</p>
 
-            <div className="navbar min-h-[40px] bg-base-100 py-0">
+            <div className="navbar min-h-[40px] bg-base-100 py-1 border-b border-indigo-200">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className=" lg:hidden">

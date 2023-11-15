@@ -8,8 +8,8 @@ import toast from "react-hot-toast";
 
 
 const Profile = () => {
-    const [candidateUser]=useCandidateUser()
-console.log(candidateUser);
+    const {candidateUser,mutate}=useCandidateUser()
+
     const { register, handleSubmit, reset,setValue, watch, formState: { errors } } = useForm();
     const file = watch("resumeFile") || true;
     if(candidateUser){
@@ -17,11 +17,12 @@ console.log(candidateUser);
         setValue('name',candidateUser.name)
         setValue('email',candidateUser.email)
         setValue('phoneNumber',candidateUser.phoneNumber)
-        candidateUser.gender=='male'? document.getElementById('male').checked=true :''
-        candidateUser.gender=='female'? document.getElementById('female').checked=true :''
+        candidateUser?.gender=='male'? document.getElementById('male').checked=true :''
+        candidateUser?.gender=='female'? document.getElementById('female').checked=true :''
       
     }
     const handleUpdateProfile=(data)=>{
+        console.log(data);
         const formData = new FormData();
         formData.append("file", data.resumeFile[0]);
         data['resumeFile']=data.resumeFile[0]?.name;
@@ -33,6 +34,7 @@ console.log(candidateUser);
             .then(res => res.json())
             .then(data => {
                 toast.success(`${data.message}`)
+                mutate(),
                 reset()
             })
     }
@@ -110,7 +112,7 @@ console.log(candidateUser);
                         </label>
                     </div>
                    
-                    <a href={`file:///D:/Next%20Js%20Projects/careers/careers-server/uploads/${candidateUser?.resumeFile}`} className="link link-primary" target="_blank">Your Resume</a>
+                    <a href={`http://localhost:5000/careers-server/uploads/${candidateUser?.resumeFile}`} className="link link-primary" target="_blank">Your Resume</a>
                 </div>
                 
                 <button type="submit" className="btn btn-sm btn-primary rounded-full px-8">Update</button>

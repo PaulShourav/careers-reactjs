@@ -1,3 +1,4 @@
+import Banner from "../../../components/homeComponents/Banner";
 import JobCard from "../../../components/homeComponents/JobCard";
 import getAllJobs from "../../../utils/getAllJobs";
 import getAppliedJobsByEmail from "../../../utils/getAppliedJobsByEmail";
@@ -8,6 +9,9 @@ const HomePage = () => {
     const { appliedJobs } = getAppliedJobsByEmail()
     return (
         <>
+        <section className="my-container mt-2">
+            <Banner/>
+        </section>
             {
                 appliedJobs.length !== 0 && <section className="my-container  mt-20">
                     <div className="border-b-2 ">
@@ -20,7 +24,7 @@ const HomePage = () => {
             }
             <section className="my-container  my-20">
             <div className="border-b-2 ">
-                        <p className="text-2xl font-bold uppercase pb-2 ps-1">Jobs circular</p>
+                        <p className="text-2xl font-bold uppercase pb-2 ps-1">Available Jobs</p>
                     </div>
                     <div className="mt-3">
 
