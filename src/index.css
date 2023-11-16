@@ -28,3 +28,7 @@
   .active-link{
     @apply  border-b-2 border-red-700 pb-[11px] font-bold
   }
+  
+ .sidebar-active-link{
+    @apply bg-indigo-500 text-white 
+  }
