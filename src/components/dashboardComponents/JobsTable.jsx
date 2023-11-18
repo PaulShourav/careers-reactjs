@@ -64,14 +64,11 @@ const JobsTable = () => {
                 setJobDeatails(data)
             })
     }
-console.log(modalId);
-console.log(modalTitle);
-console.log(editJobData);
-console.log(jobDetails);
+
     return (
         <>
-            <div className="overflow-x-auto">
-                <table className="table table-xs">
+            <div className=" overflow-x-auto">
+                <table className="table table-xs ">
                     {/* head */}
                     <thead>
                         <tr>
@@ -85,7 +82,7 @@ console.log(jobDetails);
                     </thead>
                     <tbody>
                         {
-                            jobs?.map((job, index) => <tr key={job._id}>
+                            jobs?.map((job, index) => <tr className="hover" key={job._id}>
                                 <th>{index + 1}</th>
                                 <td>{job.title}</td>
                                 <td>{job.publishedOn}</td>
@@ -103,6 +100,7 @@ console.log(jobDetails);
                     </tbody>
                 </table>
             </div>
+        
             <Model modalId={modalId} modelTitle={modalTitle} setData={editJobData !== null &&setEditJobData || jobDetails !== null &&  setJobDeatails}>
                 {editJobData !== null && <AddandEditForm editJobData={editJobData} setEditJobData={setEditJobData}/>}
                 {jobDetails !== null && <ShowJobDetails jobDetails={jobDetails}/>}
