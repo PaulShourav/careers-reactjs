@@ -3,9 +3,19 @@ import { Link } from 'react-router-dom';
 import profilePic from '../../assets/images/profile.jpg'
 import useAdminUser from "../../hooks/useAdminUser";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
+import useAuth from "../../hooks/useAuth";
+
 
 const DashboardLayout = () => {
     const { adminUser } = useAdminUser()
+    const {logout}=useAuth()
+    const handleLogout = () => {
+        logout()
+           .then(() => {
+               // localStorage.removeItem('careers-access-token')
+           })
+           .catch((error) => console.log(error))
+   };
     return (
         // <div className="drawer lg:drawer-open ">
         //     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -78,7 +88,7 @@ const DashboardLayout = () => {
                         <img src={profilePic} alt="profile" className="outline outline-2 outline-indigo-400 outline-offset-2 rounded-full w-24 h-24" />
 
                         <p className="uppercase font-bold text-xl my-1">{adminUser?.name}</p>
-                        <button className="btn btn-sm btn-primary mb-3"><FaArrowRightFromBracket /><span>Logout</span></button>
+                        <button className="btn btn-sm btn-primary mb-3"  onClick={()=>handleLogout()}><FaArrowRightFromBracket /><span>Logout</span></button>
 
 
                     </div>
@@ -86,6 +96,7 @@ const DashboardLayout = () => {
                     <li><NavLink to={'/dashboard/'} className={({ isActive }) => isActive ? "sidebar-active-link" : ""}>Dashboard</NavLink></li>
                     <li><NavLink to={'/dashboard/users'} className={({ isActive }) => isActive ? "sidebar-active-link" : ""}>Users</NavLink></li>
                     <li><NavLink to={'/dashboard/jobs'} className={({ isActive }) => isActive ? "sidebar-active-link" : ""}>Jobs</NavLink></li>
+                    <li><NavLink to={'/dashboard/applied-candidate'} className={({ isActive }) => isActive ? "sidebar-active-link" : ""}>Applied Candidate</NavLink></li>
                 </ul>
 
             </div>

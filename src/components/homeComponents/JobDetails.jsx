@@ -27,7 +27,15 @@ const JobDetails = ({ job }) => {
         'Annual Tour'
     ]
 
-
+    const handleApplyJob = (_id, slug) => {
+        const newData = { email: user?.email, job: _id, slug: slug }
+        if (!user) {
+            navigate('/signin')
+        } else (
+            storeAppliedJob(newData)
+           
+        )
+    }
     const storeAppliedJob = (newData) => {
         fetch('http://localhost:5000/appliedJob', {
             method: "POST",
@@ -43,15 +51,7 @@ const JobDetails = ({ job }) => {
                 navigate('/')
             })
     }
-    const handleApplyJob = (_id, slug) => {
-        const newData = { email: user?.email, job: _id, slug: slug }
-        if (!user) {
-            navigate('/signin')
-        } else (
-            storeAppliedJob(newData)
-           
-        )
-    }
+   
     return (
         <>
             <div className="mb-10">

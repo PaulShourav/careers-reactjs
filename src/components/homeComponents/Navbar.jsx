@@ -8,21 +8,20 @@ import profilePic from '../../assets/images/profile.jpg'
 import useCandidateUser from "../../hooks/useCandidateUser";
 import useAdminUser from "../../hooks/useAdminUser";
 
+
 const Navbar = () => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false)
     const { user, logout,loading } = useAuth()
     const {candidateUser}=useCandidateUser()
     const {adminUser}=useAdminUser()
-    console.log(candidateUser);
-    console.log(adminUser);
-    const handleLogout=()=>{
+    
+    const handleLogout = () => {
         logout()
-        .then(()=>{
-            localStorage.removeItem('careers-access-token')
-        })
-        .catch((error)=>console.log(error))
-        
-    }
+           .then(() => {
+               // localStorage.removeItem('careers-access-token')
+           })
+           .catch((error) => console.log(error))
+   };
     const commonNavLink = <>
         <li><NavLink to={'/'} className={({isActive})=>isActive?'active-link':''}>Home</NavLink></li>
         <li><Link to={'/'}>Contact</Link></li>

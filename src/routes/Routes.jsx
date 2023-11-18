@@ -11,6 +11,7 @@ import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 import UserDashboardPage from '../views/home/userDashboard/UserDashboardPage';
 import CandidateRoute from './CandidateRoute';
+import AppliedCandidatePage from '../views/dashboard/appliedCandidate/AppliedCandidatePage';
 
 
 const router=createBrowserRouter([
@@ -52,6 +53,10 @@ const router=createBrowserRouter([
            {
             path:'/dashboard/job/add',
             element:<AdminRoute><AddJobPage/></AdminRoute>
+           },
+           {
+            path:'/dashboard/applied-candidate',
+            element:<AdminRoute><AppliedCandidatePage/></AdminRoute>
            },
           
         ]
