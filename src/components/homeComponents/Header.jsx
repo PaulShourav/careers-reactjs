@@ -10,7 +10,7 @@ import useAdminUser from "../../hooks/useAdminUser";
 import bdTectSolutionLogo from "../../../public/bdtechsolution.svg"
 
 
-const Navbar = () => {
+const Header = () => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false)
     const { user, logout, loading } = useAuth()
     const { candidateUser } = useCandidateUser()
@@ -24,7 +24,7 @@ const Navbar = () => {
             .catch((error) => console.log(error))
     };
     const commonNavLink = <>
-        <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'active-link' : ''}>Home</NavLink></li>
+        <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'active-link ' : ''}>Home</NavLink></li>
         <li><Link to={'/'}>Contact</Link></li>
     </>
     const beforeSignInNavLink = <>
@@ -62,47 +62,48 @@ const Navbar = () => {
                     <img src={bdTectSolutionLogo} alt="logo" className="w-10 h-10" />
                     <p className="text-xl md:text-2xl font-bold "><span className="text-green-500">BD</span>-TECH Solution</p>
                 </Link>
+                <div className="drawer">
+                    <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+                    <div className="drawer-content flex flex-col">
+                        {/* Navbar */}
+                        <div className="w-full navbar min-h-[40px] bg-base-100 py-1 px-0  border-b border-indigo-200">
+                            <div className="flex-none lg:hidden">
+                                <label htmlFor="my-drawer-3" aria-label="open sidebar" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                                </label>
+                            </div>
+                            <div className="md:flex-1">
+                                <div className=" w-[320px] md:flex  hidden items-center border rounded-full p-1">
+                                    <input type="text" placeholder="Search" className="w-full focus:outline-none ps-2" />
+                                    <div className="mx-2 ">
+                                        <FiSearch />
+                                    </div>
+                                </div>
+                            </div>
 
-
-                <div className="navbar min-h-[40px] bg-base-100 py-1 border-b border-indigo-200">
-                    <div className="navbar-start">
-
-                        <label htmlFor="my-drawer" className=" lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                        </label>
-
-
-                        <div className=" w-[320px] md:flex hidden items-center border rounded-full p-1">
-                            <input type="text" placeholder="Search" className="w-full focus:outline-none ps-2" />
-                            <div className="mx-2 ">
-                                <FiSearch />
+                            <div className="flex-none hidden lg:block">
+                                <ul className="md:flex hidden items-center justify-center gap-10">
+                                    {/* Navbar menu content here */}
+                                    {commonNavLink}
+                                    {navLink}
+                                </ul>
                             </div>
                         </div>
+
                     </div>
-                    <div className="navbar-end ">
-                        <ul className="md:flex hidden items-center justify-center gap-10">
+                    <div className="drawer-side z-50 md:hidden">
+                        <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
+                        <ul className="flex flex-col gap-2 p-4 w-80 min-h-full bg-base-200">
+                            {/* Sidebar content here */}
                             {commonNavLink}
                             {navLink}
                         </ul>
                     </div>
                 </div>
-            </header >
+            </header>
 
-            {/* Mobile Menu */}
-            <div className="drawer z-50">
-                <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu gap-2 p-4 w-80 min-h-full bg-base-200 text-base-content">
-                        {/* Sidebar content here */}
-                        {commonNavLink}
-                        {navLink}
-
-                    </ul>
-                </div>
-            </div>
         </>
     );
 };
 
-export default Navbar;
+export default Header;
