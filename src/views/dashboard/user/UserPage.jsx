@@ -2,12 +2,13 @@ import useSWR from "swr";
 import Heading from "../../../components/dashboardComponents/Heading";
 import useAdminUser from "../../../hooks/useAdminUser";
 import { useEffect, useState } from "react";
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+import getUserByRoleType from "../../../utils/getUserByRoleType";
+
 
 const UserPage = () => {
     const [userRole,setUserRole]=useState('admin')
 
-    const { data: users=[] ,mutate  } = useSWR(`http://localhost:5000/users/all-admin-users?role=${userRole}`, fetcher);
+   const {users}=getUserByRoleType(userRole)
 
   
   
@@ -31,8 +32,9 @@ const UserPage = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone No</th>
                             <th>Resume</th>
-                            <th>Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +43,8 @@ const UserPage = () => {
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user.resumeFile}</td>
+                                <td>0{user.phoneNumber}</td>
+                                <td><a href={`http://localhost:5000/careers-server/uploads/${user?.resumeFile}`} className="link link-primary" target="_blank">Resume</a></td>
                                 <td>
                                     
                                 </td>

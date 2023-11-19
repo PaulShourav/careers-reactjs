@@ -12,6 +12,7 @@ import PrivateRoute from './PrivateRoute';
 import UserDashboardPage from '../views/home/userDashboard/UserDashboardPage';
 import CandidateRoute from './CandidateRoute';
 import AppliedCandidatePage from '../views/dashboard/appliedCandidate/AppliedCandidatePage';
+import DashboardHomePage from '../views/dashboard/dashboardHome/DashboardHomePage';
 
 
 const router=createBrowserRouter([
@@ -39,9 +40,13 @@ const router=createBrowserRouter([
         ]
     },
     {
-        path:"dashboard",
+        path:"dashboard/",
         element:<PrivateRoute><AdminRoute><DashboardLayout/></AdminRoute></PrivateRoute>,
         children:[
+            {
+                path:'/dashboard/',
+                element:<AdminRoute><DashboardHomePage/></AdminRoute>
+               },
            {
             path:'/dashboard/users',
             element:<AdminRoute><UserPage/></AdminRoute>
