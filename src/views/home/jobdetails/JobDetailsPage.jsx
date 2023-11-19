@@ -3,9 +3,11 @@ import JobDetails from "../../../components/homeComponents/JobDetails";
 import JobKeyInformations from "../../../components/homeComponents/JobKeyInformations";
 import { useEffect, useState } from "react";
 import getJobById from "../../../utils/getJobById";
+import useTitle from "../../../hooks/useTitle";
 
 
 const JobDetailsPage = () => {
+    useTitle('Job details')
     const {slug} = useParams()
     const job = getJobById(slug)
     return (

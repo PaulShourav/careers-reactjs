@@ -3,12 +3,14 @@ import Heading from "../../../components/dashboardComponents/Heading";
 import useAdminUser from "../../../hooks/useAdminUser";
 import { useEffect, useState } from "react";
 import getUserByRoleType from "../../../utils/getUserByRoleType";
+import useTitle from "../../../hooks/useTitle";
 
 
 const UserPage = () => {
+   
     const [userRole,setUserRole]=useState('admin')
-
-   const {users}=getUserByRoleType(userRole)
+    useTitle(`${userRole} user`)
+    const {users}=getUserByRoleType(userRole)
 
   
   

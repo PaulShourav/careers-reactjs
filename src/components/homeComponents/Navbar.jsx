@@ -7,6 +7,7 @@ import { useState } from "react";
 import profilePic from '../../assets/images/profile.jpg'
 import useCandidateUser from "../../hooks/useCandidateUser";
 import useAdminUser from "../../hooks/useAdminUser";
+import bdTectSolutionLogo from "../../../public/bdtechsolution.svg"
 
 
 const Navbar = () => {
@@ -56,7 +57,11 @@ const Navbar = () => {
     const navLink = user? afterSignInNavLink : beforeSignInNavLink;
     return (
         <div className="my-container">
-            <p className="flex  justify-center text-xl md:text-2xl font-bold pt-4 md:py-8"><span className="text-green-500">BD</span>-TECH SOLUATION</p>
+            <Link to={'/'} className="flex items-center justify-center gap-3">
+            <img   src={bdTectSolutionLogo} alt="logo" className="w-10 h-10"/>
+            <p className="text-xl md:text-2xl font-bold pt-4 md:py-8"><span className="text-green-500">BD</span>-TECH Solution</p>
+            </Link>
+            
 
             <div className="navbar min-h-[40px] bg-base-100 py-1 border-b border-indigo-200">
                 <div className="navbar-start">

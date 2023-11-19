@@ -4,8 +4,10 @@ import { useState } from "react";
 import Profile from "../../../components/homeComponents/Profile";
 import AppliedJobs from "../../../components/homeComponents/AppliedJobs";
 import ChangePassword from "../../../components/homeComponents/ChangePassword";
+import useTitle from "../../../hooks/useTitle";
 
 const UserDashboardPage = () => {
+    useTitle('Profile')
     const [activeTab, setActiveTab] = useState('myProfile')
     return (
         <>

@@ -1,10 +1,12 @@
 import Banner from "../../../components/homeComponents/Banner";
 import JobCard from "../../../components/homeComponents/JobCard";
+import useTitle from "../../../hooks/useTitle";
 import getAllJobs from "../../../utils/getAllJobs";
 import getAppliedJobsByEmail from "../../../utils/getAppliedJobsByEmail";
 
 
 const HomePage = () => {
+    useTitle('Home')
     const { jobs } = getAllJobs()
     const { appliedJobs } = getAppliedJobsByEmail()
     return (

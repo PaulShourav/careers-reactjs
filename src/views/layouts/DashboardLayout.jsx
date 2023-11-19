@@ -28,7 +28,7 @@ const DashboardLayout = () => {
         //                 </label>
         //             </div>
         //             <div className="flex-1">
-        //                 <p className=" text-xl  font-bold"><span className="text-green-500">BD</span>-TECH SOLUATION</p>
+        //                 <p className=" text-xl  font-bold"><span className="text-green-500">BD</span>-TECH Solution</p>
         //             </div>
 
         //         </div>
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
                         </label>
                     </div>
                     <div className="flex-1">
-                        <p className=" text-xl  font-bold"><span className="text-green-500">BD</span>-TECH SOLUATION</p>
+                        <p className=" text-xl  font-bold"><span className="text-green-500">BD</span>-TECH Solution</p>
                     </div>
                 </div>
                 <div className="mx-2 md:mx-10 my-12">

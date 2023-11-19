@@ -4,7 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Loading from '../components/common/Loading';
 
-const CandidateRoute = () => {
+const CandidateRoute = ({children}) => {
     const {candidateUser,isCandidateLoading}=useCandidateUser()
     const {user}=useAuth()
     const location=useLocation()

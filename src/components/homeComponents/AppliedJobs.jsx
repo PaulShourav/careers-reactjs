@@ -1,7 +1,9 @@
+import useTitle from "../../hooks/useTitle";
 import getAppliedJobsByEmail from "../../utils/getAppliedJobsByEmail";
 import JobCard from "./JobCard";
 
 const AppliedJobs = () => {
+    useTitle('Applied Jobs')
     const { appliedJobs } = getAppliedJobsByEmail()
     return (
         <>

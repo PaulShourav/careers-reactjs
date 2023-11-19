@@ -1,9 +1,9 @@
 import useSWR from "swr";
 import Heading from "../../../components/dashboardComponents/Heading";
-import getAllJobs from "../../../utils/getAllJobs";
+import useTitle from "../../../hooks/useTitle";
 
 const AppliedCandidatePage = () => {
-    // const { jobs } = getAllJobs()
+    useTitle('Applied candidate')
     const fetcher = (...args) => fetch(...args).then(res => res.json())
     const { data: jobs = [], mutate } = useSWR('http://localhost:5000/appliedJob/all-applied-jobs', fetcher);
 

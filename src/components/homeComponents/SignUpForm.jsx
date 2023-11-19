@@ -2,10 +2,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FaBoxOpen, FaEnvelope, FaFileImport, FaLock, FaPhone, FaUserLarge, } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
+import useTitle from "../../hooks/useTitle";
 
 
 
 const SignUpForm = ({ setTabActive }) => {
+    useTitle('Sign Up')
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const { signUp } = useAuth()
     const password = watch("password");

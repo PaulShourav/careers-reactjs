@@ -1,8 +1,10 @@
+import useTitle from "../../../hooks/useTitle";
 import getAllJobs from "../../../utils/getAllJobs";
 import getUserByRoleType from "../../../utils/getUserByRoleType";
 
 
 const DashboardHomePage = () => {
+    useTitle('Dashboard')
     const {jobs}=getAllJobs()
     const {users}=getUserByRoleType('candidate')
     return (

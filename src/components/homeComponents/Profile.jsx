@@ -4,10 +4,12 @@ import useCandidateUser from "../../hooks/useCandidateUser";
 import { useForm } from "react-hook-form";
 import { FaBoxOpen, FaEnvelope, FaFileImport, FaLock, FaPhone, FaUserLarge, } from "react-icons/fa6";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 
 
 const Profile = () => {
+    useTitle('Profile')
     const {candidateUser,mutate}=useCandidateUser()
     const { register, handleSubmit, reset,setValue, watch, formState: { errors } } = useForm();
     const file = watch("resumeFile") || true;

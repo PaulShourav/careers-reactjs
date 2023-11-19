@@ -3,14 +3,16 @@ import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock, } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const SignInForm = () => {
+    useTitle('Sign in')
     const {register,handleSubmit,reset,formState: { errors }} = useForm();
     const {user,signIn}=useAuth()
     const navigate = useNavigate()
     const location = useLocation()
     const currentLocation = location?.state?.from?.pathname || '/'
-   console.log(currentLocation);
+  
 
     const handleSignIn = ({email,password}) => {
         console.log(email,password);

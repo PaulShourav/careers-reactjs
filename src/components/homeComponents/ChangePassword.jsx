@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock, } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const ChangePassword = () => {
+    useTitle('Change password')
     const {user, updateUserPassword } = useAuth()
-    console.log(user);
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const newPassword = watch("password");
 
