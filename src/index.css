@@ -23,14 +23,14 @@
     animation: custom-animation 0.5s ease-in-out;
   }
   .active-link-signin{
-    @apply  btn btn-sm btn-primary rounded-full
+    @apply  btn btn-sm btn-primary rounded-full w-full
+  }
+  .menu-item:hover{
+    @apply block border-b-2 border-red-700   font-bold 
   }
   .active-link{
-    @apply border-b-2 border-red-700 pb-[11px] font-bold 
+    @apply block  border-b-2 border-red-700   font-bold 
   }
   .mobile-menu-active-link{
-    @apply bg-indigo-500 text-white 
-  }
- .sidebar-active-link{
     @apply bg-indigo-500 text-white 
   }

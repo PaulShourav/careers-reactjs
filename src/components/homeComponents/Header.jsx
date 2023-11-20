@@ -14,7 +14,12 @@ const Header = () => {
     const [isOpenDropdown, setIsOpenDropdown] = useState(false)
     const { user, logout, loading } = useAuth()
     const { candidateUser } = useCandidateUser()
-    const { adminUser } = useAdminUser()
+
+
+    // Sidebar hide when  Mobile menu item click
+    const handleSidebarClose = () => {
+        document.getElementById('my-drawer-3').checked = false
+    }
 
     const handleLogout = () => {
         logout()
@@ -23,12 +28,13 @@ const Header = () => {
             })
             .catch((error) => console.log(error))
     };
+
     const commonNavLink = <>
-        <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'active-link ' : ''}>Home</NavLink></li>
+        <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'active-link ' : 'menu-item'} onClick={() => handleSidebarClose()}>Home</NavLink></li>
         <li><Link to={'/'}>Contact</Link></li>
     </>
     const beforeSignInNavLink = <>
-        <li><NavLink to={'/signin'} className={({ isActive }) => isActive ? 'active-link-signin' : 'btn btn-sm btn-outline btn-primary rounded-full '} ><FaUserShield /> Singin/Up</NavLink></li>
+        <li><NavLink to={'/signin'} className={({ isActive }) => isActive ? 'active-link-signin' : 'btn btn-sm btn-outline btn-primary rounded-full w-full'} onClick={() => handleSidebarClose()}><FaUserShield /> Singin/Up</NavLink></li>
     </>
     const afterSignInNavLink = <>
         <li>
@@ -91,10 +97,17 @@ const Header = () => {
                         </div>
 
                     </div>
+                    {/* Mobile menu */}
                     <div className="drawer-side z-50 md:hidden">
                         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className="flex flex-col gap-2 p-4 w-80 min-h-full bg-base-200">
+                        <ul className="flex flex-col gap-3 p-4 w-80 min-h-full bg-base-200">
                             {/* Sidebar content here */}
+                            <div>
+                                <Link to={'/'} className="flex items-center justify-center gap-3 mt-8 mb-6">
+                                    <img src={bdTectSolutionLogo} alt="logo" className="w-10 h-10" />
+                                    <p className="text-xl md:text-2xl font-bold "><span className="text-green-500">BD</span>-TECH Solution</p>
+                                </Link>
+                            </div>
                             {commonNavLink}
                             {navLink}
                         </ul>
