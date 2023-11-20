@@ -4,6 +4,7 @@ import { FaEnvelope, FaLock, } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
+import Cookies from 'js-cookie';
 
 const SignInForm = () => {
     useTitle('Sign in')
@@ -12,8 +13,7 @@ const SignInForm = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const currentLocation = location?.state?.from?.pathname || '/'
-  
-
+   
     const handleSignIn = ({email,password}) => {
         console.log(email,password);
         signIn(email,password)
@@ -21,22 +21,26 @@ const SignInForm = () => {
             
             reset()
             navigate(currentLocation,{replace:true})
-            // const loggedUser={
-            //     email:result.user.email
-            // }
-            // fetch('http://localhost:5000/jwt',{
-            //     method:"POST",
-            //     headers:{
-            //         'content-type':'application/json'
-            //     },
-            //     body:JSON.stringify(loggedUser)
-            // })
-            // .then(res=>res.json())
-            // .then(data=>{
-            //     console.log('jet..',data);
-            //     localStorage.setItem('careers-access-token',data.token)
+            const loggedUser={
+                email:result.user.email
+            }
+            fetch('http://localhost:5000/users/jwt-signin',{
+                method:"POST",
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(loggedUser)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log('jet..',data);
+                
+              Cookies.set(import.meta.env.VITE_CookieName,data.token,{
+                expires: 1 / 24,
+                secure:true,
+              })
                
-            // })
+            })
           })
           .catch((error) => {
             console.log(error);

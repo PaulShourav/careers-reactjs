@@ -103,7 +103,7 @@ const Header = () => {
                         <ul className="flex flex-col gap-3 p-4 w-80 min-h-full bg-base-200">
                             {/* Sidebar content here */}
                             <div>
-                                <Link to={'/'} className="flex items-center justify-center gap-3 mt-8 mb-6">
+                                <Link to={'/'} className="flex items-center justify-center gap-3 mt-8 mb-6" onClick={() => handleSidebarClose()}>
                                     <img src={bdTectSolutionLogo} alt="logo" className="w-10 h-10" />
                                     <p className="text-xl md:text-2xl font-bold "><span className="text-green-500">BD</span>-TECH Solution</p>
                                 </Link>

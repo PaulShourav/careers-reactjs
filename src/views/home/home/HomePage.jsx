@@ -15,7 +15,7 @@ const HomePage = () => {
             <Banner/>
         </section>
             {
-                appliedJobs.length !== 0 && <section className="my-container  mt-20">
+                appliedJobs?.length !== 0 && <section className="my-container  mt-20">
                     <div className="border-b-2 ">
                         <p className="text-2xl font-bold uppercase pb-2 ps-1">Applied Jobs</p>
                     </div>
