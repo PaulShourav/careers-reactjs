@@ -1,15 +1,14 @@
 import { FaCirclePlus } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
-import getAppliedJobsByEmail from "../../utils/getAppliedJobsByEmail";
+import useAppliedJobsByEmail from "../../hooks/useAppliedJobsByEmail";
 
 const JobDetails = ({ job }) => {
     const { _id, slug, longTitle, location, jobResponsibilities, educationalRequirements, experienceRequirements } = job || {};
     const { user } = useAuth()
     const navigate = useNavigate()
-    const { mutate } = getAppliedJobsByEmail()
+    const { mutate } = useAppliedJobsByEmail()
 
     const benefits = [
         'Yearly 3 times Salary Reviews/Increment',

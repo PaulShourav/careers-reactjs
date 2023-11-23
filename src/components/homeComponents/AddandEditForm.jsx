@@ -80,7 +80,10 @@ const AddandEditForm = ({ editJobData, setEditJobData }) => {
         const newData = { _id, ...data, slug, publishedOn, deadline, longTitle, jobResponsibilities, educationalRequirements, experienceRequirements }
         fetch('http://localhost:5000/jobs/update', {
             method: 'PATCH',
-            headers: { "content-type": "application/json" },
+            headers: { 
+            "content-type": "application/json",
+            "authorizatication": `Bearer ${accessToken}` 
+        },
             body: JSON.stringify(newData)
         })
             .then(res => res.json())

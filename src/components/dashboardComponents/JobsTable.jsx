@@ -5,6 +5,7 @@ import getAllJobs from "../../utils/getAllJobs";
 import AddandEditForm from "../homeComponents/AddandEditForm";
 import ShowJobDetails from "./ShowJobDetails";
 import Model from "../common/Model";
+import Cookies from "js-cookie";
 
 
 
@@ -14,13 +15,15 @@ const JobsTable = () => {
     const [modalTitle, setModalTitle] = useState('');
     const [editJobData, setEditJobData] = useState(null);
     const [jobDetails, setJobDeatails] = useState(null);
+    const accessToken = Cookies.get('BD-Tech-Solution')
 
     const {jobs,mutate}=getAllJobs()
     // console.log(jobs);
     const handleStatus = (_id, status) => {
         console.log(_id, status);
-        fetch(`http://localhost:5000/jobs?_id=${_id}&status=${status}`, {
-            method: 'PATCH'
+        fetch(`http://localhost:5000/jobs/status?_id=${_id}&status=${status}`, {
+            method: 'PATCH',
+            headers: { "authorizatication": `Bearer ${accessToken}` } 
         })
             .then(res => res.json())
             .then(data => {
@@ -33,7 +36,8 @@ const JobsTable = () => {
     //Job deleted by ID 
     const handleDelete = (_id) => {
         fetch(`http://localhost:5000/jobs/${_id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: { "authorizatication": `Bearer ${accessToken}` } 
         })
             .then(res => res.json())
             .then(data => {
@@ -48,7 +52,7 @@ const JobsTable = () => {
         setModalId(_id)
         setModalTitle('Edit Job post')
         
-        fetch(`http://localhost:5000/jobs/${slug}`)
+        fetch(`http://localhost:5000/jobs/edit/${slug}`)
             .then(res => res.json())
             .then(data => {
                 setEditJobData(data)

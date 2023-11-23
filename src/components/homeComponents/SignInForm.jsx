@@ -4,7 +4,7 @@ import { FaEnvelope, FaLock, } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
-import Cookies from 'js-cookie';
+
 
 const SignInForm = () => {
     useTitle('Sign in')

@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
     const logout = () => {
-        setIsLoading(false)
+        // setIsLoading(false)
         return signOut(auth)
     }
     const updateUserPassword = async (newPassword) => {
@@ -27,9 +27,8 @@ const AuthProvider = ({ children }) => {
     }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-           
+            const authToken = Cookies.get('BD-Tech-Solution');
             if (currentUser) {
-                console.log('1');
                 const loggedUser = {
                     email: currentUser.email
                 }
@@ -43,15 +42,24 @@ const AuthProvider = ({ children }) => {
                     .then(res => res.json())
                     .then(data => {
                         Cookies.set(import.meta.env.VITE_CookieName, data.token, {
-                            expires: 1 / 24,
+                            expires: 1,
                             secure: true
                         })
-                       
+
                     })
+            }
+            //if access token has expired ,then  user will be signed out
+            if (!authToken) {
+                console.log('logout',authToken);
+                logout()
+                    .then(() => {
+
+                    })
+                    .catch((error) => console.log(error))
             }
             setUser(currentUser);
             setIsLoading(false);
-            
+
         });
 
         return () => unsubscribe();

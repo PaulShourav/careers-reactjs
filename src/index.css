@@ -34,3 +34,7 @@
   .mobile-menu-active-link{
     @apply bg-indigo-500 text-white 
   }
+/* Dashboard */
+.sidebar-active-link{
+@apply  active 
+}

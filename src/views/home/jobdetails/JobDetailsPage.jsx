@@ -4,6 +4,7 @@ import JobKeyInformations from "../../../components/homeComponents/JobKeyInforma
 import { useEffect, useState } from "react";
 import getJobById from "../../../utils/getJobById";
 import useTitle from "../../../hooks/useTitle";
+import Banner from "../../../components/homeComponents/Banner";
 
 
 const JobDetailsPage = () => {
@@ -11,6 +12,10 @@ const JobDetailsPage = () => {
     const {slug} = useParams()
     const job = getJobById(slug)
     return (
+        <>
+        <section className="my-container mt-2">
+            <Banner/>
+        </section>
         <section className="my-container my-24">
             <div className="flex gap-0 md:gap-7 ">
                 <div className="w-full md:basis-2/3">
@@ -21,6 +26,7 @@ const JobDetailsPage = () => {
                 </div>
             </div>
         </section>
+        </>
     );
 };
 

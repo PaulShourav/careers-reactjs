@@ -1,16 +1,16 @@
 import useSWR from "swr";
 import Heading from "../../../components/dashboardComponents/Heading";
 import useAdminUser from "../../../hooks/useAdminUser";
-import { useEffect, useState } from "react";
-import getUserByRoleType from "../../../utils/getUserByRoleType";
+import {useState } from "react";
 import useTitle from "../../../hooks/useTitle";
+import useUserByRoleType from "../../../hooks/useUserByRoleType";
 
 
 const UserPage = () => {
    
     const [userRole,setUserRole]=useState('admin')
     useTitle(`${userRole} user`)
-    const {users}=getUserByRoleType(userRole)
+    const {users}=useUserByRoleType(userRole)
 
   
   

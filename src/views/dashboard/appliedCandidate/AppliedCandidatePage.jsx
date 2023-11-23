@@ -1,13 +1,16 @@
 import useSWR from "swr";
 import Heading from "../../../components/dashboardComponents/Heading";
 import useTitle from "../../../hooks/useTitle";
+import Cookies from "js-cookie";
+
+const fetcher = (url, token) => fetch(url, { headers: { "authorizatication": `Bearer ${token}` } }).then(res => res.json())
 
 const AppliedCandidatePage = () => {
     useTitle('Applied candidate')
-    const fetcher = (...args) => fetch(...args).then(res => res.json())
-    const { data: jobs = [], mutate } = useSWR('http://localhost:5000/appliedJob/all-applied-jobs', fetcher);
 
-    console.log(jobs);
+    const accessToken = Cookies.get('BD-Tech-Solution')
+    const { data: jobs = [], mutate } = useSWR( ['http://localhost:5000/appliedJob/all-applied-jobs', accessToken], ([url, accessToken]) => fetcher(url, accessToken))
+
     return (
         <>
             <Heading title={"Applied Candidate"} />

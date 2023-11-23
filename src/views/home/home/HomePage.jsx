@@ -3,8 +3,9 @@ import Banner from "../../../components/homeComponents/Banner";
 import JobCard from "../../../components/homeComponents/JobCard";
 import useTitle from "../../../hooks/useTitle";
 import getAllJobs from "../../../utils/getAllJobs";
-import getAppliedJobsByEmail from "../../../utils/getAppliedJobsByEmail";
 import useAppliedJobsByEmail from "../../../hooks/useAppliedJobsByEmail";
+
+
 
 
 
@@ -12,10 +13,7 @@ const HomePage = () => {
     useTitle('Home')
     const { jobs } = getAllJobs()
      const  {appliedJobs} = useAppliedJobsByEmail()
-    
-
-    
-    console.log(appliedJobs); 
+     
     return (
         <>
         <section className="my-container mt-2">

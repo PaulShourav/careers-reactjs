@@ -13,6 +13,8 @@ import UserDashboardPage from '../views/home/userDashboard/UserDashboardPage';
 import CandidateRoute from './CandidateRoute';
 import AppliedCandidatePage from '../views/dashboard/appliedCandidate/AppliedCandidatePage';
 import DashboardHomePage from '../views/dashboard/dashboardHome/DashboardHomePage';
+import { useEffect } from 'react';
+import useAuth from '../hooks/useAuth';
 
 
 const router=createBrowserRouter([
