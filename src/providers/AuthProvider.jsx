@@ -27,8 +27,9 @@ const AuthProvider = ({ children }) => {
     }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            const authToken = Cookies.get('BD-Tech-Solution');
+            
             if (currentUser) {
+                console.log('1');
                 const loggedUser = {
                     email: currentUser.email
                 }
@@ -48,20 +49,23 @@ const AuthProvider = ({ children }) => {
 
                     })
             }
-            //if access token has expired ,then  user will be signed out
-            if (!authToken) {
-                console.log('logout',authToken);
-                logout()
-                    .then(() => {
-
-                    })
-                    .catch((error) => console.log(error))
-            }
+            
             setUser(currentUser);
             setIsLoading(false);
 
         });
+         //if access token has expired ,then  user will be signed out
+        const authToken = Cookies.get('BD-Tech-Solution');
+        console.log(authToken);
+        if (!authToken) {
+            console.log('2');
+            console.log('logout',authToken);
+            logout()
+                .then(() => {
 
+                })
+                .catch((error) => console.log(error))
+        }
         return () => unsubscribe();
     }, []);
     const value = {
