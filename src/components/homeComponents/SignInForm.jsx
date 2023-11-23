@@ -15,32 +15,10 @@ const SignInForm = () => {
     const currentLocation = location?.state?.from?.pathname || '/'
    
     const handleSignIn = ({email,password}) => {
-        console.log(email,password);
         signIn(email,password)
         .then((result) => {
-            
             reset()
-            navigate(currentLocation,{replace:true})
-            const loggedUser={
-                email:result.user.email
-            }
-            fetch('http://localhost:5000/users/jwt-signin',{
-                method:"POST",
-                headers:{
-                    'content-type':'application/json'
-                },
-                body:JSON.stringify(loggedUser)
-            })
-            .then(res=>res.json())
-            .then(data=>{
-                console.log('jet..',data);
-                
-              Cookies.set(import.meta.env.VITE_CookieName,data.token,{
-                expires: 1 / 24,
-                secure:true,
-              })
-               
-            })
+             navigate(currentLocation,{replace:true})
           })
           .catch((error) => {
             console.log(error);

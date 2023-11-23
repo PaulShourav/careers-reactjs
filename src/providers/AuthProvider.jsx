@@ -1,9 +1,9 @@
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import app from "../firebase/Firebase.config";
 import AuthContext from "../contexts/AuthContext";
-
+import Cookies from 'js-cookie';
 
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
@@ -16,19 +16,42 @@ const AuthProvider = ({ children }) => {
     const signIn = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
-    const logout=()=>{
+    const logout = () => {
         setIsLoading(false)
-       return signOut(auth)
+        return signOut(auth)
     }
-    const updateUserPassword=async(newPassword)=>{
-      const signinUser=auth.currentUser;
-  
-       return  updatePassword(signinUser,newPassword)
+    const updateUserPassword = async (newPassword) => {
+        const signinUser = auth.currentUser;
+
+        return updatePassword(signinUser, newPassword)
     }
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+           
+            if (currentUser) {
+                console.log('1');
+                const loggedUser = {
+                    email: currentUser.email
+                }
+                fetch('http://localhost:5000/users/jwt-signin', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        Cookies.set(import.meta.env.VITE_CookieName, data.token, {
+                            expires: 1 / 24,
+                            secure: true
+                        })
+                       
+                    })
+            }
+            setUser(currentUser);
             setIsLoading(false);
+            
         });
 
         return () => unsubscribe();
@@ -41,7 +64,7 @@ const AuthProvider = ({ children }) => {
         logout,
         updateUserPassword
     };
-   
+
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 };
 

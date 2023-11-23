@@ -8,6 +8,7 @@ import profilePic from '../../assets/images/profile.jpg'
 import useCandidateUser from "../../hooks/useCandidateUser";
 import useAdminUser from "../../hooks/useAdminUser";
 import bdTectSolutionLogo from "../../../public/bdtechsolution.svg"
+import Cookies from "js-cookie";
 
 
 const Header = () => {
@@ -24,7 +25,8 @@ const Header = () => {
     const handleLogout = () => {
         logout()
             .then(() => {
-                // localStorage.removeItem('careers-access-token')
+                Cookies.remove('BD-Tech-Solution')
+                // localStorage.removeItem('BD-Tech-Solution')
             })
             .catch((error) => console.log(error))
     };
